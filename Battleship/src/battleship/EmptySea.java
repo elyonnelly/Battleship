@@ -6,12 +6,19 @@ public class EmptySea extends Ship {
         length = 1;
     }
     @Override
-    boolean shootAt(int row, int column) {
-        return  false;
-    }
-    @Override
-    boolean isSunk() {
+    public boolean shootAt(int row, int column) {
+        hit[0] = true;
         return false;
     }
-
+    @Override
+    public boolean isSunk() {
+        return false;
+    }
+    @Override
+    public char getShipCharacter(int row, int column) {
+        if (hit[0]) {
+            return  '-';
+        }
+        return  '.';
+    }
 }

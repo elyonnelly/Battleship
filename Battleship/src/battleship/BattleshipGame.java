@@ -30,7 +30,7 @@ public class BattleshipGame {
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         int parsedInt = tryParseInt(in.next());
-        while (parsedInt < 0 || parsedInt > 9 ) {
+        while (parsedInt < 0 || parsedInt >= ocean.size) {
             System.out.println("incorrect input, please repeat");
             System.out.print(message);
             parsedInt = tryParseInt(in.next());
@@ -63,7 +63,11 @@ public class BattleshipGame {
             int row = getInt("Enter row number: ");
             int column = getInt("Enter column number: ");
 
-            if (ocean.getShipsArray()[row][column].shootAt(row,column)) {
+            //ohhhh wellllll. И зачем казалось бы вообще ocean?
+            /*if (ocean.shootAt(row, column)) {
+                System.out.println("hit");
+            }*/
+            if (ocean.getShipsArray()[row][column].shootAt(row, column)) {
                 System.out.println("hit");
             }
             else {
