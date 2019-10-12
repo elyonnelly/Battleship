@@ -187,6 +187,12 @@ public class Ship {
         return  "S";
     }
 
+
+    /** Get a symbol denoting a specific part of the ship
+     * @param row part of ship location row
+     * @param column part of ship location column
+     * @return
+     */
     //мое временное или не очень решение проблемы
     public char getShipCharacter(int row, int column) {
         if (isSunk()) {
