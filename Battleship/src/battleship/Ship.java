@@ -149,12 +149,14 @@ public class Ship {
      */
     public boolean shootAt(int row, int column)
     {
-        //todo: разобраться с назначением, хех.
-        if (horizontal && bowRow <= row && row <= bowRow + length && bowColumn == column && !hit[row - bowRow] ) {
+        if (isSunk()) {
+            return  false;
+        }
+        if (horizontal && bowRow <= row && row <= bowRow + length - 1 && bowColumn == column && !hit[row - bowRow] ) {
             hit[row - bowRow] = true;
             return true;
         }
-        if (!horizontal && bowColumn <= column && column <= bowColumn + length && bowRow == row && !hit[column - bowColumn]) {
+        if (!horizontal && bowColumn <= column && column <= bowColumn + length - 1 && bowRow == row && !hit[column - bowColumn]) {
             hit[column - bowColumn] = true;
             return true;
         }

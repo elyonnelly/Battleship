@@ -3,6 +3,7 @@ package battleship;
 public class EmptySea extends Ship {
 
     public EmptySea() {
+        hit = new boolean[1];
         length = 1;
     }
     @Override

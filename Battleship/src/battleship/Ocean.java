@@ -34,16 +34,45 @@ public class Ocean {
      * and '.' to indicate a location that you have never fired upon.
      */
     public void print() {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size + 1; i++) {
+            if (i == 0) {
+                System.out.print("\t");
+                for (int j = 0; j < size; j++) {
+                    System.out.print(j + "\t");
+                }
+                System.out.println();
+                continue;
+            }
+            System.out.print(i - 1 + "\t");
             for (int j = 0; j < size; j++) {
-                //todo: возможно это стоит улучшить. и делать это, не изменяя интерфейса Ship...
-                System.out.print(ships[i][j].getShipCharacter(i, j));
+                System.out.print(ships[i - 1][j].getShipCharacter(i - 1, j) + "\t");
             }
             System.out.println();
         }
     }
 
-
+    public void printAllShip() {
+        for (int i = 0; i < size + 1; i++) {
+            if (i == 0) {
+                System.out.print("\t");
+                for (int j = 0; j < size; j++) {
+                    System.out.print(j + "\t");
+                }
+                System.out.println();
+                continue;
+            }
+            System.out.print(i - 1 + "\t");
+            for (int j = 0; j < size; j++) {
+                if (ships[i - 1][j] instanceof EmptySea) {
+                    System.out.print(".\t");
+                }
+                else {
+                    System.out.print("S\t");
+                }
+            }
+            System.out.println();
+        }
+    }
 
     /**
      * Fill the ocean with EmptySea class instances
@@ -52,6 +81,9 @@ public class Ocean {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 ships[i][j] = new EmptySea();
+                ships[i][j].setBowRow(i);
+                ships[i][j].setBowColumn(j);
+                ships[i][j].setHorizontal(false);
             }
         }
     }
@@ -78,7 +110,7 @@ public class Ocean {
     /**
      * Place all ships randomly. To be precise, place 1 battleship, 2 cruisers, 3 destroyers, 4 submarines.
      */
-    private void placeAllShipsRandomly() {
+    public void placeAllShipsRandomly() {
         placeShip(new Battleship());
 
         for (int i = 0; i < 2; i++) {
@@ -112,11 +144,13 @@ public class Ocean {
      * still afloat, (not an EmptySea), false if it does not.
      */
     public boolean shootAt(int row, int column) {
-        //TODO: надо ли тут изменять состояние ship[row][column]?
         shotsFired++;
-        if (isOccupied(row, column)) {
+        if (ships[row][column].shootAt(row, column)) {
             hitCount++;
-            //ships[row][column].shootAt(row, column);
+            if (ships[row][column].isSunk()) {
+                shipsSunk++;
+
+            }
             return true;
         }
         return false;
