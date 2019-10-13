@@ -87,6 +87,7 @@ public class BattleshipGame {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+
         do {
             ocean = new Ocean();
             playGame();

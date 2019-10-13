@@ -51,28 +51,6 @@ public class Ocean {
         }
     }
 
-    public void printAllShip() {
-        for (int i = 0; i < size + 1; i++) {
-            if (i == 0) {
-                System.out.print("\t");
-                for (int j = 0; j < size; j++) {
-                    System.out.print(j + "\t");
-                }
-                System.out.println();
-                continue;
-            }
-            System.out.print(i - 1 + "\t");
-            for (int j = 0; j < size; j++) {
-                if (ships[i - 1][j] instanceof EmptySea) {
-                    System.out.print(".\t");
-                }
-                else {
-                    System.out.print("S\t");
-                }
-            }
-            System.out.println();
-        }
-    }
 
     /**
      * Fill the ocean with EmptySea class instances
